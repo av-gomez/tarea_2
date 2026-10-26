@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.env
+*.env
+tarea_2/datos/raw/
+tarea_2/modelos/*.safetensors
+tarea_2/modelos/*.bin
+tarea_2/modelos/*.onnx
+tarea_2/modelos/checkpoint-*/
+tarea_2/modelos/descargas/
