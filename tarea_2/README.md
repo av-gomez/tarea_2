@@ -81,4 +81,4 @@ streamlit run app.py
 Para reproducir los notebooks (Python 3.11): `pip install -r requirements-pipeline.txt`. Luego descarga los datos según `datos/fuentes.csv`, ejecuta `python pipeline/preparar_audio.py` y abre `01_extraccion.ipynb` y `02_evaluacion.ipynb`. Para la extracción con Gemini se necesita un archivo `.env` con `GEMINI_API_KEY=...`, que no se versiona.
 
 ## Uso de IA
-El proyecto se desarrolló con apoyo de Claude Code. Las capturas de la conversación están en `evidencias_ia/`.
+El proyecto se desarrolló con apoyo de Claude Code. La conversación completa está en `evidencias_ia/` (ver `evidencias_ia/README.md`). En `evidencias_ia/guia_prompting.md` hay lecciones para mejorar los prompts, con ejemplos de esta conversación.
