@@ -48,21 +48,21 @@ t1, t2, t3, t4 = st.tabs(["📊 Resultados", "🔎 Búsqueda", "📄 Documentos"
 
 with t1:
     a, b = st.columns(2)
-    a.plotly_chart(px.histogram(docs, x="tipo", color="tipo", title="Documentos por tipo"), use_container_width=True)
+    a.plotly_chart(px.histogram(docs, x="tipo", color="tipo", title="Documentos por tipo"), width="stretch")
     if len(trans):
         b.plotly_chart(px.bar(trans.sort_values("duracion_seg"), x="id", y="duracion_seg", color="origen",
-                              title="Duración por clip (s)"), use_container_width=True)
+                              title="Duración por clip (s)"), width="stretch")
     if len(mdoc):
         g = mdoc.melt(id_vars=["id", "tipo"], value_vars=[k for k in ["CER_paddle", "CER_tesseract", "CER_easyocr"] if k in mdoc], var_name="modelo", value_name="CER")
         a.plotly_chart(px.bar(g.groupby(["tipo", "modelo"], as_index=False).CER.mean(), x="tipo", y="CER",
-                              color="modelo", barmode="group", title="CER por tipo de documento"), use_container_width=True)
+                              color="modelo", barmode="group", title="CER por tipo de documento"), width="stretch")
     if len(maud):
         g = maud.melt(id_vars=["id", "condicion"], value_vars=["WER_whisper", "WER_parakeet"], var_name="modelo", value_name="WER")
         b.plotly_chart(px.bar(g, x="id", y="WER", color="modelo", barmode="group", hover_data=["condicion"],
-                              title="WER por clip de evaluación"), use_container_width=True)
+                              title="WER por clip de evaluación"), width="stretch")
     if len(metr):
         st.subheader("Tabla comparativa")
-        st.dataframe(metr, use_container_width=True, hide_index=True)
+        st.dataframe(metr, width="stretch", hide_index=True)
 
 with t2:
     q = st.text_input("Buscar palabra en textos OCR y ASR", placeholder="Lima, Huáscar, fútbol…")
@@ -78,12 +78,12 @@ with t2:
         fa = fa[fa.texto_asr.fillna("").str.contains(q, case=False, regex=False)]
     st.plotly_chart(px.bar(pd.DataFrame({"modalidad": ["documentos", "audios"], "coincidencias": [len(fd), len(fa)]}),
                            x="modalidad", y="coincidencias", title=f"Registros que cumplen los filtros{' para «' + q + '»' if q else ''}"),
-                    use_container_width=True)
+                    width="stretch")
     st.markdown(f"**Documentos ({len(fd)})**")
-    st.dataframe(fd[["id", "tipo", "titulo", "modelo_ocr", "texto_ocr"]], use_container_width=True, hide_index=True)
+    st.dataframe(fd[["id", "tipo", "titulo", "modelo_ocr", "texto_ocr"]], width="stretch", hide_index=True)
     st.download_button("Descargar documentos filtrados (CSV)", fd.to_csv(index=False).encode("utf-8"), "documentos_filtrados.csv")
     st.markdown(f"**Audios ({len(fa)})**")
-    st.dataframe(fa[["id", "origen", "duracion_seg", "n_hablantes", "modelo_asr", "texto_asr"]], use_container_width=True, hide_index=True)
+    st.dataframe(fa[["id", "origen", "duracion_seg", "n_hablantes", "modelo_asr", "texto_asr"]], width="stretch", hide_index=True)
     st.download_button("Descargar transcripciones filtradas (CSV)", fa.to_csv(index=False).encode("utf-8"), "transcripciones_filtradas.csv")
 
 
