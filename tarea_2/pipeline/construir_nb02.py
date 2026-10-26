@@ -13,7 +13,7 @@ md("""# Tarea 2 · Parte 2 — Evaluación, extracción estructurada y comparaci
 - Muestra de **10 documentos** (3 impresos, 4 fotos, 3 manuscritos) y **10 clips** de OpenSLR 73 (10 hablantes distintos, 5 mujeres y 5 hombres), todos del corpus de la Parte 1. Las grabaciones de Commons (ruido, música, varios hablantes) no tienen referencia manual completa, por lo que se analizan aparte como *caso difícil* mediante el desacuerdo entre modelos.
 - Las configuraciones de todos los modelos son las de la Parte 1 y no se tocaron después de ver métricas.
 - Normalización idéntica para referencia e hipótesis: minúsculas, sin tildes, sin puntuación, espacios colapsados; en audio se eliminan marcas `[HABLANTE_n]`.
-- **Origen de las referencias:** en audio, el texto humano de OpenSLR 73 (guion leído por cada hablante, revisado contra el audio); en documentos, transcripción manual hecha mirando la imagen (columna `estado_revision`).""")
+- **Origen de las referencias:** en audio, el texto humano de OpenSLR 73 (guion leído por cada hablante, revisado contra el audio); en documentos, transcripción hecha mirando la imagen ampliada, revisada en dos pasadas (columna `estado_revision`). **Importante:** las referencias de documentos fueron transcritas por el asistente de IA, no por una persona; son independientes de los tres OCR evaluados, pero no son una transcripción humana.""")
 
 code("""import sys, json, re, unicodedata
 import pandas as pd, numpy as np, jiwer
@@ -146,11 +146,11 @@ code("""print(tabla.to_string(index=False))""")
 md("""### Decisión
 | Modalidad | Elección | Por qué |
 |---|---|---|
-| Documentos | **PaddleOCR PP-OCRv5 mobile** | Menor CER global (0.476 frente a 0.529 de EasyOCR y 0.672 de Tesseract) y 5 veces más rápido que EasyOCR en CPU (5.6 frente a 28.6 s/doc). Tesseract es el más rápido (2.5 s/doc), pero su CER en fotos duplica al de PaddleOCR. |
+| Documentos | **PaddleOCR PP-OCRv5 mobile** | Menor CER global (0.475 frente a 0.529 de EasyOCR y 0.673 de Tesseract) y 5 veces más rápido que EasyOCR en CPU (5.6 frente a 28.6 s/doc). Tesseract es el más rápido (2.5 s/doc), pero su CER en fotos duplica al de PaddleOCR. |
 | Audio | **faster-whisper small** como modelo principal; **Parakeet** como alternativa si importa la velocidad | En lectura limpia los dos quedan casi empatados (WER 0.032 frente a 0.039; la diferencia es de unas pocas palabras sobre ~1 400). Parakeet es ~3 veces más rápido (RTF 0.17 frente a 0.48). Whisper entrega puntuación y segmentos más útiles para el SRT y la diarización. |
 
 ### Reflexión por tipo
-- **Fotos (CER 0.23 con PaddleOCR, el mejor caso).** Las placas tienen letra grande de molde. El error se concentra en la placa de bronce con reflejos (doc_014, CER 0.38) y en la leyenda latina curva (doc_016, 0.43). La placa de Grau, nítida, baja a 0.04.
+- **Fotos (CER 0.22 con PaddleOCR, el mejor caso).** Las placas tienen letra grande de molde. El error se concentra en la placa de bronce con reflejos (doc_014, CER 0.36) y en la leyenda latina curva (doc_016, 0.43). La placa de Grau, nítida, baja a 0.04.
 - **Impresos (0.48).** El CER es más alto de lo esperado porque los 3 impresos evaluados tienen **partes manuscritas o tipografía decorativa**: los datos escritos a mano en el recibo de 1895, la caligrafía inglesa del diploma de 1921 y los textos superpuestos con sello de la acción de 1878. El OCR lee bien las partes tipográficas y falla en lo demás.
 - **Manuscritos (0.74–0.81, el peor caso).** Ningún modelo está entrenado en letra colonial de los siglos XVIII y XIX ni en sus abreviaturas. Por eso los tres OCR producen texto casi inutilizable. EasyOCR queda algo mejor, pero el error sigue siendo de 0.74. Para este tipo haría falta un modelo de HTR especializado (por ejemplo, Transkribus o TrOCR afinado) o una transcripción humana.
 - **Audio en estudio frente a audio de calle.** Con lectura limpia los dos ASR cometen menos de 4 % de error. En las entrevistas de Commons el desacuerdo entre modelos sube de 0.04 a 0.36 de media, y llega a 0.73 en la conferencia con audio a −40 dB y a 0.66 en la feria con música. Es la señal de que el ruido, la música y el habla superpuesta degradan mucho la transcripción.

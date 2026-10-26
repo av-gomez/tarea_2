@@ -35,13 +35,13 @@ La fuente, la licencia y la forma de recuperar cada archivo están en `datos/fue
 ## Resultados de evaluación (los mismos 10 documentos y los mismos 10 clips para todos los modelos)
 | Modalidad | Modelo | Métrica | Valor | Costo (CPU) |
 |---|---|---|---|---|
-| Documentos | **PaddleOCR PP-OCRv5 mobile (base)** | CER | **0.476** | 5.6 s/doc |
+| Documentos | **PaddleOCR PP-OCRv5 mobile (base)** | CER | **0.475** | 5.6 s/doc |
 | Documentos | EasyOCR 1.7.2 | CER | 0.529 | 28.6 s/doc |
-| Documentos | Tesseract 5 spa | CER | 0.672 | 2.5 s/doc |
+| Documentos | Tesseract 5 spa | CER | 0.673 | 2.5 s/doc |
 | Audio | **faster-whisper small (base)** | WER | **0.032** | RTF 0.48 |
 | Audio | Parakeet-TDT 0.6B v3 | WER | 0.039 | RTF 0.17 |
 
-CER por tipo de documento con PaddleOCR: fotos 0.23 · impresos 0.48 · manuscritos 0.81. En las entrevistas de Commons, que no tienen referencia, el desacuerdo whisper/Parakeet sube de 0.04 a 0.36.
+CER por tipo de documento con PaddleOCR: fotos 0.22 · impresos 0.48 · manuscritos 0.81. En las entrevistas de Commons, que no tienen referencia, el desacuerdo whisper/Parakeet sube de 0.04 a 0.36.
 
 **Acuerdo LLM-humano:** **16/20 (80 %)** de extracciones completamente correctas (`datos/auditoria_llm.csv`).
 - **Criterios:** tema y resumen fieles al texto; todo campo no nulo sustentado literalmente; sin omitir fechas, emisores ni montos explícitos; sin campos inventados.
@@ -54,7 +54,7 @@ CER por tipo de documento con PaddleOCR: fotos 0.23 · impresos 0.48 · manuscri
 
 ## Hallazgos
 1. **El tipo de escritura importa más que la calidad de la foto.**
-   - Las fotos de placas con letra de molde, a pesar de los reflejos y la inclinación, logran el mejor CER (0.23).
+   - Las fotos de placas con letra de molde, a pesar de los reflejos y la inclinación, logran el mejor CER (0.22).
    - Los "impresos" evaluados quedan en 0.48 porque mezclan tipografía con datos manuscritos o caligrafía decorativa.
    - Los manuscritos coloniales rondan 0.8 con los tres OCR, porque ninguno está entrenado en paleografía.
 2. **En habla leída el ASR ya es casi perfecto; el reto es el audio de campo.**
@@ -66,7 +66,7 @@ CER por tipo de documento con PaddleOCR: fotos 0.23 · impresos 0.48 · manuscri
 1. **Referencias y muestra de audio.**
    - Las referencias de audio son el texto humano de OpenSLR 73, es decir, el guion que lee cada hablante. Por eso los 10 clips de evaluación son lectura limpia.
    - Las entrevistas de Commons no tienen transcripción manual completa. En ellas solo se mide el desacuerdo entre modelos, que **no es WER**.
-   - Las referencias de los documentos se transcribieron mirando la imagen. Las de los manuscritos coloniales pueden tener errores de paleografía.
+   - Las referencias de los documentos las transcribió el asistente de IA mirando las imágenes ampliadas, en dos pasadas; **no son transcripciones humanas**. Son independientes de los OCR evaluados, pero las de los manuscritos coloniales pueden tener errores de paleografía.
 2. **Cómputo en CPU.**
    - Todo corrió en una laptop sin GPU. Para que el tiempo alcanzara se usaron whisper `small` y PaddleOCR *mobile*, no `large-v3` ni los modelos *server*.
    - La diarización automática (umbral 0.6) sobresegmentó la entrevista en 19 hablantes. Por eso se fijó el número de hablantes en 3, según la descripción del archivo, y solo se diarizó `clip_021`.
