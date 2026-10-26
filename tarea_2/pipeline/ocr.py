@@ -11,6 +11,7 @@ RECORTES = BASE / "datos/raw/documentos/recortes"
 SALIDAS.mkdir(parents=True, exist_ok=True)
 RECORTES.mkdir(parents=True, exist_ok=True)
 TESSERACT = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+TESSDATA = BASE.parent / "tools/tessdata"  # spa.traineddata de tessdata_best
 
 PADDLE_CFG = dict(text_detection_model_name="PP-OCRv5_mobile_det",
                   text_recognition_model_name="latin_PP-OCRv5_mobile_rec",
@@ -79,10 +80,10 @@ def tesseract(path, forzar=False):
     pytesseract.pytesseract.tesseract_cmd = TESSERACT
     im = preprocesar(path)
     t0 = time.perf_counter()
-    txt = pytesseract.image_to_string(im, lang="spa", config="--oem 1 --psm 3")
+    txt = pytesseract.image_to_string(im, lang="spa", config=f'--oem 1 --psm 3 --tessdata-dir {TESSDATA.as_posix()}')
     seg = time.perf_counter() - t0
     lineas = [l.strip() for l in txt.splitlines() if l.strip()]
-    res = {"modelo": f"Tesseract {pytesseract.get_tesseract_version()} (spa, oem 1, psm 3)",
+    res = {"modelo": f"Tesseract {pytesseract.get_tesseract_version()} (spa tessdata_best, oem 1 LSTM, psm 3)",
            "lineas": lineas, "texto": "\n".join(lineas), "segundos_proceso": seg}
     jp.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     return res

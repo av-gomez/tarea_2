@@ -1,4 +1,4 @@
-id,archivo,tipo,fuente,texto_ocr,modelo_ocr,texto_referencia,titulo,fuente_url,conf_media
+id,archivo,tipo,fuente,texto_ocr,modelo_ocr,titulo,fuente_url,conf_media,texto_referencia
 doc_001,datos/raw/documentos/doc_001.jpg,impreso,Internet Archive - John Carter Brown Library (Dominio público),"GACETA
 ESTRAORDINARIA.
 LEL GOBIERNO DE LIMA
@@ -45,7 +45,7 @@ cito español , los bagajes y caba-
 ejercito unido libertador, hasta el
  llos de tropa, las guarniciones que
 Desaguadero, con los parques, se hallea en todo el territorio y
-maestranzas y todos los almace- demas fuerzas y objetos perten","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Gaceta Extraordinaria del Gobierno de Lima, 22 de diciembre de 1824",https://archive.org/details/gacetadelgobiern01brow,0.9710895279620556
+maestranzas y todos los almace- demas fuerzas y objetos perten","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Gaceta Extraordinaria del Gobierno de Lima, 22 de diciembre de 1824",https://archive.org/details/gacetadelgobiern01brow,0.9710895279620556,
 doc_002,datos/raw/documentos/doc_002.jpg,impreso,Internet Archive - John Carter Brown Library (Dominio público),"30
 No en Medica-
 D. JOSE FERNANDO DE ABASCAL Y SOUSA,
@@ -157,7 +157,7 @@ tivo que sea, el Ayuntamiento del pueblo á que pertenezca dará
 ro de 1 813.= El Marques de la Concordia. = Toribio de Acetal.
 Es copia.
 Toribio de Acebal.
-RPJCR","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Bando del virrey José Fernando de Abascal, Lima, febrero de 1813",https://archive.org/details/djosefernandodea08spai,0.9355078190565109
+RPJCR","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Bando del virrey José Fernando de Abascal, Lima, febrero de 1813",https://archive.org/details/djosefernandodea08spai,0.9355078190565109,
 doc_003,datos/raw/documentos/doc_003.jpg,impreso,Internet Archive - University of Illinois Urbana-Champaign (Dominio público),"INDICE DEL PRIMER SEMESTRE DE 1901
 15
 00
@@ -389,7 +389,7 @@ sargento mayor D. Manuel Lora y Otoya........
 Otra nombrando Secretario-amanuense del Visitador de
 
 647
-Correos y Telégrafos, á D. Marco Aurelio Quevedo.....","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"El Peruano (diario oficial) - Índice del primer semestre de 1901, p. 15",https://archive.org/details/elperuano61peru,0.9240377870356214
+Correos y Telégrafos, á D. Marco Aurelio Quevedo.....","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","El Peruano (diario oficial) - Índice del primer semestre de 1901, p. 15",https://archive.org/details/elperuano61peru,0.9240377870356214,
 doc_004,datos/raw/documentos/doc_004.jpg,impreso,Internet Archive - Biodiversity Heritage Library / AMNH (Dominio público),"-4-
 dita 79.ª ; empieza otra loma - Se llega á la base, 11.8, al otro
 lado.-Se descansó.
@@ -439,7 +439,7 @@ Del 3.° á Santa Catalina...
 ;
 Kms. 55.
 El camino de Sarayacu á Santa Catalina es tal vez el mejor de
-todos los de la provincia de Mainas. Está trasado en medio del","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,Boletín de la Sociedad Geográfica de Lima - itinerario de Sarayacu a Santa Catalina (p. 4),https://archive.org/details/boletndelasocied1719soci,0.9289254596829415
+todos los de la provincia de Mainas. Está trasado en medio del","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",Boletín de la Sociedad Geográfica de Lima - itinerario de Sarayacu a Santa Catalina (p. 4),https://archive.org/details/boletndelasocied1719soci,0.9289254596829415,
 doc_005,datos/raw/documentos/doc_005.jpg,impreso,Internet Archive - John Carter Brown Library (Dominio público),"Señor Doctor Don Matias de la Torre y Tagle.
 Sefior Don Joseph Gutierrez  Oficial de ia Contaduria de
 Tributos.
@@ -486,7 +486,7 @@ Señor Don Tomás Shee, Teniente Coronel de los Reales Exérci-
 tos, en Coquimbo.
 Señor Doa Juan Iguacio Rodriguez, Subdelegado del Partido de
 Yauyos.
-Sc-","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Mercurio Peruano, tomo I (1791) - lista de suscriptores",https://archive.org/details/mercurioperuanod01cale,0.969121239286788
+Sc-","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Mercurio Peruano, tomo I (1791) - lista de suscriptores",https://archive.org/details/mercurioperuanod01cale,0.969121239286788,
 doc_006,datos/raw/documentos/doc_006.jpg,impreso,Wikimedia Commons (Public domain),"N 8219
 Teléfono No.
 PERUVIAN TELEPHONE COMPANY.
@@ -512,7 +512,7 @@ L/
 .
 4 {5
 .
--","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Recibo de la Peruvian Telephone Company, Lima 1895",https://commons.wikimedia.org/wiki/File:Peruvian_Telephone_Company_receipt_Lima_1895.JPG,0.7597997280267569
+-","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Recibo de la Peruvian Telephone Company, Lima 1895",https://commons.wikimedia.org/wiki/File:Peruvian_Telephone_Company_receipt_Lima_1895.JPG,0.7597997280267569,"Nº 8219 Teléfono No. 531 PERUVIAN TELEPHONE COMPANY. Contrata No. 907. Lima, Setbre 23 de 1895 RECIBI de la Hda Monte Rico la suma de Noventa Soles Plata por la 1ª anualidad adelantada que comienza en 13 de Julio 1895 Secretario Soles 90 Plata 45 Rebaja por seis meses de falta de servicio 45 Imp. T. Aguirre Lima"
 doc_007,datos/raw/documentos/doc_007.jpg,impreso,Wikimedia Commons (CC BY-SA 3.0),"PERÚ
 1888
 La Sociedad G
@@ -535,7 +535,7 @@ Leifiois l. Sona
 Inscrito à hoja 32del
 Secretaria
 hibro de socios
-LIt P. BERRIO Y C.","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Diploma de socio corresponsal de la Sociedad Geográfica de Lima, 1921",https://commons.wikimedia.org/wiki/File:Socgeolima.jpg,0.8648967276448789
+LIt P. BERRIO Y C.","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Diploma de socio corresponsal de la Sociedad Geográfica de Lima, 1921",https://commons.wikimedia.org/wiki/File:Socgeolima.jpg,0.8648967276448789,"La Muy Noble y Muy Leal Ciudad de los Reyes del Perú Sociedad Geográfica de Lima Perú 1888 La Sociedad Geográfica de Lima cuyo Consejo Directivo ha elegido miembro de la Institución al Sr. Capitán de Navío Ernesto Burzagli, le confiere el presente Diploma de Socio Corresponsal Lima, 15 de agosto de 1921 M. Melitón Carvajal Presidente Aceptado en sesión del 13 del presente mes Inscrito á hojas 32 del libro de socios Scipión E. Llona Secretario Lit. F. Berrio y Ca."
 doc_008,datos/raw/documentos/doc_008.jpg,impreso,Wikimedia Commons (Public domain),"COMRANIA
 del
 -
@@ -589,7 +589,7 @@ PRESIDENTE
 ly
 GERENTE
 
-A","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Acción de la Compañía del Ferrocarril de la Oroya y Mineral de Pasco, Lima 1878",https://commons.wikimedia.org/wiki/File:Ferrocarril_de_la_Oroya_y_Mineral_de_Pasco_1878.jpg,0.650558208287866
+A","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Acción de la Compañía del Ferrocarril de la Oroya y Mineral de Pasco, Lima 1878",https://commons.wikimedia.org/wiki/File:Ferrocarril_de_la_Oroya_y_Mineral_de_Pasco_1878.jpg,0.650558208287866,"COMPAÑIA del Ferrocarril de la Oroya y Mineral de Pasco Nº 2807 Sociedad Anónima, organizada en 4 de Diciembre de 1877. CAPITAL SOCIAL, £ EST. 3.000.000. Dividido en 30.000 Acciones, de á Cien Libras Esterlinas, cada una. Certificamos, que el portador es dueño de Una Accion de á Cien Libras Esterlinas, en la Compañía del Ferrocarril de la Oroya y Mineral de Pasco, integramente pagada con arreglo á los Estatutos Sociales que constan en las Escrituras Públicas otorgadas ante el Notario Don Francisco Palacios en Lima, Capital de la República del Perú, en 6 y 29 de Diciembre del año de 1877. El pago de dividendos por utilidades sobre esta accion, constará de anotaciones á la vuelta Lima, Enero 31 de 1878. Gerente Presidente Secretario £100 Mineral de Pasco Compañía del Ferro Carril de la Oroya Lima"
 doc_009,datos/raw/documentos/doc_009.jpg,foto,Wikimedia Commons (CC BY 2.0)," Mats Hosere
 Armada det Bern.
 ESTADO GENERAL
@@ -724,7 +724,7 @@ II
 lyi d ""
  Berdna 
 ,
-E         .","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,Estado General del monitor Huáscar (1879) exhibido en vitrina,https://commons.wikimedia.org/wiki/File:Estado_General_de_Miguel_Grau.jpg,0.4969300486423351
+E         .","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",Estado General del monitor Huáscar (1879) exhibido en vitrina,https://commons.wikimedia.org/wiki/File:Estado_General_de_Miguel_Grau.jpg,0.4969300486423351,
 doc_010,datos/raw/documentos/doc_010.jpg,foto,Wikimedia Commons (CC BY-SA 4.0),"2a Mp do
 eurddm, Aguto Ddardo, en repraontaoldn de
 presideato de la sepdblion, y mnuel do rreyre y santander, en
@@ -774,7 +774,7 @@ ar do lo catt d 2e  c ) Cggn
 d L  t e L Pl t m
 al    T
   
-SO","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,Acta de entrega de Tarata (1925) en vitrina - exposición de la Cancillería,https://commons.wikimedia.org/wiki/File:Canciller_inaugura_exposici%C3%B3n_del_centenario_del_retorno_de_Tarata_al_Per%C3%BA.jpg,0.6754652354121208
+SO","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",Acta de entrega de Tarata (1925) en vitrina - exposición de la Cancillería,https://commons.wikimedia.org/wiki/File:Canciller_inaugura_exposici%C3%B3n_del_centenario_del_retorno_de_Tarata_al_Per%C3%BA.jpg,0.6754652354121208,
 doc_011,datos/raw/documentos/doc_011.jpg,foto,Wikimedia Commons (CC BY-SA 4.0),"B- 335
 Hrotocolo de Arbitraje
 simntnamalumol aA
@@ -807,7 +807,7 @@ novecientos veintidds.
 Mt Corat
 Hi Sclan
 Wh lo
-Cale Maan","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,Protocolo de Arbitraje (1922) en vitrina - exposición de la Cancillería,https://commons.wikimedia.org/wiki/File:Canciller_inaugura_exposici%C3%B3n_del_centenario_del_retorno_de_Tarata_al_Per%C3%BA_-_54778280176.jpg,0.8990966804099806
+Cale Maan","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",Protocolo de Arbitraje (1922) en vitrina - exposición de la Cancillería,https://commons.wikimedia.org/wiki/File:Canciller_inaugura_exposici%C3%B3n_del_centenario_del_retorno_de_Tarata_al_Per%C3%BA_-_54778280176.jpg,0.8990966804099806,
 doc_012,datos/raw/documentos/doc_012.jpg,foto,Wikimedia Commons (CC BY-SA 4.0),"Arbitr
 PERÚ
 de Relaciones Exteriores
@@ -834,7 +834,7 @@ Tarata al Perú
 EL GRAN ACONTECIMIENTO DE LA SEMANA
 LA REINTEGRACION DE LA PROVINCIA DE TARATA
 morando la Reincorporación al Se-
-Patria de la Provincia de Tarata","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,Panel '100 años del retorno de Tarata al Perú' con recortes de prensa,https://commons.wikimedia.org/wiki/File:Canciller_inaugura_exposici%C3%B3n_del_centenario_del_retorno_de_Tarata_al_Per%C3%BA_-_54778614075.jpg,0.8811366480809671
+Patria de la Provincia de Tarata","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",Panel '100 años del retorno de Tarata al Perú' con recortes de prensa,https://commons.wikimedia.org/wiki/File:Canciller_inaugura_exposici%C3%B3n_del_centenario_del_retorno_de_Tarata_al_Per%C3%BA_-_54778614075.jpg,0.8811366480809671,
 doc_013,datos/raw/documentos/doc_013.jpg,foto,Wikimedia Commons (CC BY-SA 3.0),"MIRAFLORES
 CIUDAD
 HEROICA
@@ -875,7 +875,7 @@ Dr. JORGE MUÑOZ WELLS
 Cap. de Nav. (r) JORGE GUERRERO LANG
 Alcalde de Miraflores
 Presidente de la Asociación Nacional Pro Marina del Perú
-23 de octubre de 2012 con ocasión de la colocación de la nueva efigie a Don Miguel Grau Seminario","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Placa con biografía de Miguel Grau, Miraflores (Lima)",https://commons.wikimedia.org/wiki/File:Monumento_a_Miguel_Grau_-_Miraflores_-_Biograf%C3%ADa_de_Miguel_Grau.jpg,0.9757191960404559
+23 de octubre de 2012 con ocasión de la colocación de la nueva efigie a Don Miguel Grau Seminario","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Placa con biografía de Miguel Grau, Miraflores (Lima)",https://commons.wikimedia.org/wiki/File:Monumento_a_Miguel_Grau_-_Miraflores_-_Biograf%C3%ADa_de_Miguel_Grau.jpg,0.9757191960404559,"MIRAFLORES CIUDAD HEROICA ASOCIACION NACIONAL PRO MARINA DEL PERU PRIMER CENTENARIO El máximo héroe naval del Perú nació en Piura el 27 de julio de 1834, hijo del Teniente Coronel Juan Manuel Grau y Berrio, natural de Cartagena de Indias, que llegó al Perú formando parte del ejército del Libertador Bolívar, y de Doña María Luisa Seminario y del Castillo, descendiente de antiguas familias piuranas. Forjado desde niño en las rudas faenas de los barcos, recorrió los mas diversos mares. Obtuvo como hombre de mar una insuperada experiencia, que le serviría luego como oficial de la Armada Nacional y como diputado por Paita, ingresó al servicio de la Armada a los 19 años. Combatió a la flota española en la guerra de 1866. Durante la Guerra con Chile no rehuyó el combate. En Iquique, al mando del monitor ""Huáscar"", hunde a la corbeta ""Esmeralda"", en la que sucumbe su Comandante, el Capitán de Fragata Arturo Prat. Su magnanimidad con los chilenos náufragos y heridos suplicantes, es reconocida con el grito ""Viva el Perú generoso"". Grau recorría impávido las costas septentrionales de Chile, apresaba buques y lanchas, y con osadía y destreza burlaba la persecución de los poderosos blindados chilenos. Dice de él Riva Agüero: ""Era el alma y el brazo, la espada eficaz y la milagrosa armadura, el denodado ariete y el único sólido valladar del Perú"". En la mañana del 8 de octubre de 1879, se vio rodeado por toda la escuadra Chilena, frente a Punta Angamos. La superioridad de la artillería enemiga aceleró el combate; duró menos de dos horas. Los disparos del ""Cochrane"" arrasaron la torre de mando del Monitor. El cuerpo de Grau voló en pedazos. A su lado murieron sucesivamente el héroe lambayecano Teniente 1º Diego Ferré, ayudante de Grau; su segundo, el Capitán de Corbeta Elías Aguirre, también lambayecano y el Teniente 1º Melitón Rodríguez. Cayó con graves heridas el Teniente 1º Enrique Palacios, muerto pocos días después. El mando recayó en el Teniente 1º Pedro Gárezon, quien dio la orden de hundir la nave. Ya el ""Huáscar"" se sumergía cuando fue capturado por los chilenos. Grau pasó a la inmortalidad como marino, estratega, valiente y generoso. Cumplió su palabra: ""Si el ""Huáscar"" no regresa triunfante al Callao, tampoco yo regresaré"". Casado con Dolores Cabero tuvo diez hijos. Es un ejemplo como esposo, padre, militar y político. Su vida y su muerte, constituyen un sublime legado para la juventud de la Patria y para la Marina de Guerra del Perú. ""PARA HACERNOS DIGNOS DE SU BENDITA HERENCIA, JUREMOS TODOS TRABAJAR POR EL ENGRANDECIMIENTO DEL PERÚ CON LA AUSTERIDAD, LA PUREZA DE MIRAS, LA ABNEGACIÓN Y EL VALOR DE LOS QUE NOS DIO TAN MAGNÍFICO EJEMPLO"". Dr. JORGE MUÑOZ WELLS Alcalde de Miraflores Cap. de Nav. (r) JORGE GUERRERO LANG Presidente de la Asociación Nacional Pro Marina del Perú 23 de octubre de 2012 con ocasión de la colocación de la nueva efigie a Don Miguel Grau Seminario"
 doc_014,datos/raw/documentos/doc_014.jpg,foto,Wikimedia Commons (CC BY-SA 4.0),"TLEY
 FENIX
 FRED
@@ -934,17 +934,17 @@ POR INCIATIVA DE SV GERENTE
 GENERAL FERNANDO
 PALAZVELO
 EGUN PROVECTO DE LA ARE. LVCIANA JOLOI
-WWWLVASAROADARTCOR","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Placa de bronce del Edificio Fénix, Lima",https://commons.wikimedia.org/wiki/File:Placa_del_Edificio_F%C3%A9nix.jpg,0.938181235628613
+WWWLVASAROADARTCOR","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Placa de bronce del Edificio Fénix, Lima",https://commons.wikimedia.org/wiki/File:Placa_del_Edificio_F%C3%A9nix.jpg,0.938181235628613,"EDIFICIO FENIX EL EDIFICIO FENIX FUE CONSTRUIDO EN 1934 POR LA FIRMA FRED T. LEY CIA. LTD. POR ENCARGO DE LA COMPAÑIA DE SEGUROS LA FENIX PERUANA PARA ALBERGAR SU SEDE SOCIAL. EL ENCARGO CONSISTIÓ EN AÑADIR DOS PISOS Y UNA AZOTEA DE DEPARTAMENTOS A UNA FINCA EXISTENTE DE UN SÓLO PISO DONDE FUNCIONABAN ALMACENES Y COMERCIOS EN RENTA. EN LA SEGUNDA PLANTA FUNCIONARON LAS OFICINAS DE LA COMPAÑIA DE SEGUROS, Y EN LA TERCERA PLANTA EL CLUB SOCIAL DE LA COMPAÑIA (PHOENIX CLUB). EL EDIFICIO ES INTERVENIDO NUEVAMENTE EN 1947 PARA AMPLIAR LAS INSTALACIONES DEL PHOENIX CLUB AL EDIFICIO COLINDANTE (FENIX ENCARNACION). EN EL AÑO 2005 ES ADQUIRIDO POR ARTE EXPRESS Y COMPAÑIA SAC Y SOMETIDO A UNA REHABILITACION INTEGRAL COMO EDIFICIO DE OFICINAS EN ALQUILER POR INICIATIVA DE SU GERENTE GENERAL FERNANDO PALAZUELO Y SEGUN PROYECTO DE LA ARQ. LUCIANA SOLDI. WWW.LUNACAROYNDART.COM"
 doc_015,datos/raw/documentos/doc_015.jpg,foto,Wikimedia Commons (CC BY-SA 3.0),"TODO SER HUMANO TIENE EN EL CAMINO SU PEDESTAL DE HEROE
 EL MERITO CONSISTE EN QUE LLEGADO EL MOMENTO
 TENGA EL CORAJE SUFICIENTE PARA SUBIR A EL
 QUIÑONES
-X","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Inscripción del monumento a José Quiñones, San Isidro (Lima)",https://commons.wikimedia.org/wiki/File:Lima_MonumentoQuinones_Inscription.jpg,0.8360564529895782
+X","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Inscripción del monumento a José Quiñones, San Isidro (Lima)",https://commons.wikimedia.org/wiki/File:Lima_MonumentoQuinones_Inscription.jpg,0.8360564529895782,"""TODO SER HUMANO TIENE EN EL CAMINO SU PEDESTAL DE HEROE EL MERITO CONSISTE EN QUE LLEGADO EL MOMENTO TENGA EL CORAJE SUFICIENTE PARA SUBIR A EL"" J. Quiñones QUIÑONES"
 doc_016,datos/raw/documentos/doc_016.jpg,foto,Wikimedia Commons (CC BY-SA 3.0),"PRO
 ttt
 MONASTERIO DE NAZARENAS
 CARMELITAS
-DESCALZAS","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Placa del Monasterio de Nazarenas Carmelitas Descalzas, Lima",https://commons.wikimedia.org/wiki/File:Placa_Monasterio_Nazarenas_Lima.JPG,0.8809742629528046
+DESCALZAS","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Placa del Monasterio de Nazarenas Carmelitas Descalzas, Lima",https://commons.wikimedia.org/wiki/File:Placa_Monasterio_Nazarenas_Lima.JPG,0.8809742629528046,ZELO ZELATUS SUM PRO DOMINO DEO EXERCITUUM MONASTERIO DE NAZARENAS CARMELITAS DESCALZAS
 doc_017,datos/raw/documentos/doc_017.jpg,manuscrito,Wikimedia Commons (Public domain),"69
 CemretiRe
 i
@@ -1009,7 +1009,7 @@ L
 
 Fommr ito
 Ectr
-y Ealnaiantel","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Acta de la Independencia del Perú, Lima 15 de julio de 1821",https://commons.wikimedia.org/wiki/File:Acta_de_Independencia_Peru.jpg,0.415675734098141
+y Ealnaiantel","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Acta de la Independencia del Perú, Lima 15 de julio de 1821",https://commons.wikimedia.org/wiki/File:Acta_de_Independencia_Peru.jpg,0.415675734098141,
 doc_018,datos/raw/documentos/doc_018.jpg,manuscrito,Internet Archive - John Carter Brown Library (Dominio público),"06-060.6
 go quartilio.
 CILLO,ANOSDEMILSETR
@@ -1036,7 +1036,7 @@ da en bs Rerts end.  Sazo Ve7s2 esnada en esta
 tna del Dacho pa len ofo en 28 il 
 172
 022
-S.","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Real Provisión del Superior Gobierno al cabildo de la catedral de Trujillo, 1752",https://archive.org/details/realprovisindels00peru,0.6218859591969738
+S.","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Real Provisión del Superior Gobierno al cabildo de la catedral de Trujillo, 1752",https://archive.org/details/realprovisindels00peru,0.6218859591969738,
 doc_019,datos/raw/documentos/doc_019.jpg,manuscrito,Internet Archive - John Carter Brown Library (Dominio público),"S
 go la Vastrera y Ala ot proa, y no pusimos al SSE: à poco Vato
 lamo eAliento al NE,yani continuo con tiempo clavo.
@@ -1063,7 +1063,7 @@ A a   a
 por el NNo vonancible, alauna mar ol So, y Fiempo elavo: asi con
 tinus hasta el anochecer que se toldo el cielo, y aturbono el hori-
 zonte o Derte: à las & lamo el iento al oNo frerguito con po
-ca apua-, por lo gue se aferravon Tuanetes y Sobre-merand:","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Diario de la navegación desde el Callao de Lima a Chiloé (1796), p. 8",https://archive.org/details/diariodelanauega00mora,0.8502800575009098
+ca apua-, por lo gue se aferravon Tuanetes y Sobre-merand:","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Diario de la navegación desde el Callao de Lima a Chiloé (1796), p. 8",https://archive.org/details/diariodelanauega00mora,0.8502800575009098,
 doc_020,datos/raw/documentos/doc_020.jpg,manuscrito,Wikimedia Commons (Public domain) - BnF Gallica,"⑦
 wa hanarera, imimdaron detalmod aguel vecn.
 daxio, que huyendo one logrann los Ingterervague
@@ -1122,7 +1122,7 @@ ba triome ungranconumo en aguel Reyno.
 no atierden aiena culauna. FocoenFabaco
 da Criy dedanade de Cona, Bacyy Caballa
 ontama gue comumoen Ieyno,yeloleOh
-vorabumanefy sy Cypouiar Cocelenter. Ho pros.","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Relación de la Provincia de Saña, Reyno del Perú (fines del s. XVIII), pp. 7-8","https://commons.wikimedia.org/wiki/File:Perou._%22Relacion._Provincia_de_Sana,_reyno_del_Peru._Situacion_local%22,_s.d._(fin_du_XVIIIe_si%C3%A8cle)_(21_p._et_carte_au_1-1_000_000)_-_btv1b10874724p_(05_of_15).jpg",0.6911440913454961
+vorabumanefy sy Cypouiar Cocelenter. Ho pros.","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Relación de la Provincia de Saña, Reyno del Perú (fines del s. XVIII), pp. 7-8","https://commons.wikimedia.org/wiki/File:Perou._%22Relacion._Provincia_de_Sana,_reyno_del_Peru._Situacion_local%22,_s.d._(fin_du_XVIIIe_si%C3%A8cle)_(21_p._et_carte_au_1-1_000_000)_-_btv1b10874724p_(05_of_15).jpg",0.6911440913454961,
 doc_021,datos/raw/documentos/doc_021.jpg,manuscrito,Wikimedia Commons (Public domain),"14NHS
 dn que guap caxynoa, leva bra puesto enme o.
 7 criatugas mal al tos, como als hombres
@@ -1259,7 +1259,7 @@ todo,a fia o amplanch
 a-0ocs
 cancha
 Naer
-coo","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Relación de antigüedades deste reyno del Pirú (c. 1613), folios con el dibujo del Coricancha",https://commons.wikimedia.org/wiki/File:Relaci%C3%B3n_de_antig%C3%BCedades_deste_reino_del_Pir%C3%BA_(1613).jpg,0.6220269656746927
+coo","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Relación de antigüedades deste reyno del Pirú (c. 1613), folios con el dibujo del Coricancha",https://commons.wikimedia.org/wiki/File:Relaci%C3%B3n_de_antig%C3%BCedades_deste_reino_del_Pir%C3%BA_(1613).jpg,0.6220269656746927,
 doc_022,datos/raw/documentos/doc_022.jpg,manuscrito,Wikimedia Commons (Public domain),"282
 Dls Fni Gialomes
 Cala isanio
@@ -1290,7 +1290,7 @@ Se
 U
 -
 3deo
-Da","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Partida de bautismo de Micaela Villegas 'La Perricholi', Lima 1748",https://commons.wikimedia.org/wiki/File:Baptismal_certificate_Micaela_Villegas.jpg,0.4642445954584306
+Da","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Partida de bautismo de Micaela Villegas 'La Perricholi', Lima 1748",https://commons.wikimedia.org/wiki/File:Baptismal_certificate_Micaela_Villegas.jpg,0.4642445954584306,Ylario Domingo quince de diziembre de mill setecientos quarenta y ocho as. Yo Dn Joseph Paniagua Gomes de la Baranda thte de los Curas Rectores desta Sta Ygla Metropolitana exorsise puse oleo y chrisma a Maria Michaela Billegas q nasio el dia veinte y ocho de setiembre deste presente año a quien bautizo el Rdo P. fr. Juan Enriques del orden de Nro Pe Sn Agustin hixa lexitima de D. Joseph Billegas y de Da Theresa Hurtado fue su madrina Da Theresa Hurtado testigos el Pe fr. Juan Enriques y D. Alexandro de la Canal Dn Joseph Paniagua Gomes de la Baranda Lunes dos de Dre de mill setecientos quarenta y ocho as Yo el Dr D. Salvador Ubaldo de Castro thte de los Curas Rectores desta Sta Ygla Metropolitana de los Reyes exorsise puse oleo y chrisma a Ma Ana Bernarda Zabala de edad de un mes hixa lexitima de D. Nicolas de Bergara y de Da Maria Eladia Cobos fue su madrina Da Rosa Vergara y Bustamante testigos Dn Alexandro de la Canal Dr. D. Salvador Ubaldo de Castro Viernes seis de Dre de setecientos quarenta y ocho as Yo el Dr D. Salvador Ubaldo de Castro thte de los Curas Rectores desta Sta Ygla Metropolitana exorsise puse oleo y chrisma a Bernardo Joseph de edad de tres meses a quien bautizo en caso de necesidad el Lizdo Dn Franco de Alarcon hixo lexitimo del Capn Dn Juan de Vargas Machuca y de Da Maria Vicenta de Vargas Machuca fue su padrino Dn Cayetano
 doc_023,datos/raw/documentos/doc_023.jpg,manuscrito,Wikimedia Commons (CC BY-SA 4.0),"132
 .
 
@@ -1320,7 +1320,7 @@ Z2xnCRO
 .
 -
 .
--","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Partida de bautismo de José Olaya, Lima 1792 (Archivo Arzobispal de Lima)",https://commons.wikimedia.org/wiki/File:Joseolaya_partida_nacimiento_chica.jpg,0.5275912682215372
+-","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Partida de bautismo de José Olaya, Lima 1792 (Archivo Arzobispal de Lima)",https://commons.wikimedia.org/wiki/File:Joseolaya_partida_nacimiento_chica.jpg,0.5275912682215372,"Silberio Indio 132 En la ciudad de los Reyes en cinco de Febrero de setecientos noventa y dos. Yo el Lizdo Dn Sebastian Guerrero, con licencia parroquial exorcise puse oleo y chrisma a Silberio Indio, de edad de seis meses quince dias a quien en caso de necesidad le echo el agua el P. Fr. Eusebio Ramirez religioso del Ord. de la merced hijo legitimo de Jose Olaya y Melchora Balandra, fue su padrino Dn Juan Dionicio Toledo, testigos Ciriaco Obredo y Pedro Fechum. Sebastian Guerrero"
 doc_024,datos/raw/documentos/doc_024.jpg,manuscrito,Wikimedia Commons (CC BY-SA 4.0),"LalvaeraAtocha
 J.Mha Slem
 a Dean.
@@ -1361,7 +1361,7 @@ Ve DJae tt Yaate
 CS A
 .
 Carles Jitphs apoinan
-Sagx: e","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Libro de defunciones del Sagrario de la Catedral de Lima, octubre de 1842",https://commons.wikimedia.org/wiki/File:Sepultura_Bernardo_O%27Higgins.jpg,0.5050252719623286
+Sagx: e","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Libro de defunciones del Sagrario de la Catedral de Lima, octubre de 1842",https://commons.wikimedia.org/wiki/File:Sepultura_Bernardo_O%27Higgins.jpg,0.5050252719623286,
 doc_025,datos/raw/documentos/doc_025.jpg,manuscrito,Wikimedia Commons (Public domain),"tuti
 Nieniontes d lonbali
 Patsie
@@ -1395,4 +1395,4 @@ las misoe
 
 4
 Ae
-","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",,"Carta de Miguel Grau a Carmela Carvajal de Prat, monitor Huáscar 1879",https://commons.wikimedia.org/wiki/File:Miguel_Grau_-_Brev.jpg,0.453093743937857
+","PaddleOCR 3.4.1 PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)","Carta de Miguel Grau a Carmela Carvajal de Prat, monitor Huáscar 1879",https://commons.wikimedia.org/wiki/File:Miguel_Grau_-_Brev.jpg,0.453093743937857,"Monitor Huáscar Pisagua Junio 2 de 1879 Dignísima Señora Un sagrado deber me autoriza á dirijirme á Ud. y siento profundamente que esta carta por los sentimientos que va á remover en Ud. contribuya á aumentar el dolor que hoy justamente le agobiará. En el combate naval del 21 del próximo pasado, que tuvo lugar en las aguas de Iquique, entre las naves Peruanas y Chilenas, su digno y valeroso esposo el Capitán de Fragata D. Arturo Prat Comandante de la Esmeralda, fue como Ud. no lo ignorará ya, víctima de su temerario arrojo en defensa y gloria de la bandera de su Patria. Deplorando sinceramente tan infausto acontecimiento, y acompañándola en su duelo, cumplo con el penoso y triste deber de enviarle las para Ud. inestimables prendas, que se encontraron en su poder, y que son las que figuran en la lista adjunta. Ellas le servirán indudablemente de algun pequeño consuelo en medio de su gran desgracia, y por eso me he anticipado á remitírselas. Reiterándole mis sentimientos de condolencia, logro Señora la oportunidad para ofrecerle mis servicios, consideraciones y respetos. De Ud. muy atto y S.S. Miguel Grau Sra Da Carmela C. de Prat Valparaiso"

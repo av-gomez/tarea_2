@@ -1,0 +1,5 @@
+modalidad,modelo,métrica,valor,costo
+documentos,PaddleOCR PP-OCRv5 (base),CER,0.476,11.1 s/doc CPU
+documentos,EasyOCR (alternativo),CER,0.529,229.4 s/doc CPU
+audio,faster-whisper small (base),WER,0.032,RTF 0.48
+audio,Parakeet-TDT 0.6B v3 (alternativo),WER,0.039,RTF 0.17

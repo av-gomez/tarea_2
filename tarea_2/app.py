@@ -28,7 +28,7 @@ st.markdown(
     "seudonimización · extracción de campos JSON con LLM · evaluación CER/WER sobre 10 documentos y 10 clips con referencia manual. "
     "Los modelos se ejecutaron en notebooks; esta app solo explora los resultados.")
 
-c = st.columns(6)
+c = st.columns(7)
 c[0].metric("Documentos procesados", len(docs))
 c[1].metric("Minutos de audio", f"{trans.duracion_seg.sum() / 60:.1f}" if len(trans) else "–")
 
@@ -39,9 +39,10 @@ def m(modelo):
 
 
 c[2].metric("CER PaddleOCR", m("PaddleOCR"))
-c[3].metric("CER EasyOCR", m("EasyOCR"))
-c[4].metric("WER whisper-small / Parakeet", f"{m('whisper')} / {m('Parakeet')}")
-c[5].metric("Acuerdo LLM vs. humano", f"{int(audit.correcto.sum())}/{len(audit)} ({audit.correcto.mean():.0%})" if len(audit) else "pendiente")
+c[3].metric("CER Tesseract / EasyOCR", f"{m('Tesseract')} / {m('EasyOCR')}")
+c[4].metric("WER whisper-small", m("whisper"))
+c[5].metric("WER Parakeet", m("Parakeet"))
+c[6].metric("Acuerdo LLM vs. humano", f"{int(audit.correcto.sum())}/{len(audit)} ({audit.correcto.mean():.0%})" if len(audit) else "pendiente")
 
 t1, t2, t3, t4 = st.tabs(["📊 Resultados", "🔎 Búsqueda", "📄 Documentos", "🎧 Audios"])
 
@@ -52,7 +53,7 @@ with t1:
         b.plotly_chart(px.bar(trans.sort_values("duracion_seg"), x="id", y="duracion_seg", color="origen",
                               title="Duración por clip (s)"), use_container_width=True)
     if len(mdoc):
-        g = mdoc.melt(id_vars=["id", "tipo"], value_vars=["CER_paddle", "CER_easyocr"], var_name="modelo", value_name="CER")
+        g = mdoc.melt(id_vars=["id", "tipo"], value_vars=[k for k in ["CER_paddle", "CER_tesseract", "CER_easyocr"] if k in mdoc], var_name="modelo", value_name="CER")
         a.plotly_chart(px.bar(g.groupby(["tipo", "modelo"], as_index=False).CER.mean(), x="tipo", y="CER",
                               color="modelo", barmode="group", title="CER por tipo de documento"), use_container_width=True)
     if len(maud):
@@ -107,7 +108,8 @@ with t3:
         b.text_area("Texto de referencia (manual)", r.texto_referencia, height=160)
         if len(mdoc) and r.id in set(mdoc.id):
             mm = mdoc[mdoc.id == r.id].iloc[0]
-            b.metric("CER PaddleOCR / EasyOCR", f"{mm.CER_paddle:.3f} / {mm.CER_easyocr:.3f}")
+            b.metric("CER PaddleOCR / Tesseract / EasyOCR",
+                     f"{mm.CER_paddle:.3f} / {mm.get('CER_tesseract', float('nan')):.3f} / {mm.CER_easyocr:.3f}")
     cj = campos_llm(r.id)
     b.markdown("**Campos estructurados (LLM)**")
     b.json(cj) if cj else b.caption("Sin extracción LLM disponible.")

@@ -55,28 +55,31 @@ ea["RTF_whisper"] = [voz.whisper(r.archivo_audio)["segundos_proceso"] / r.duraci
 print(f"LÍNEA BASE  CER PaddleOCR = {ed.CER_paddle.mean():.3f}   |   WER whisper-small = {ea.WER_whisper.mean():.3f}")""")
 
 md("## 3. Modelos alternativos sobre las mismas muestras")
-md("""- **Documentos:** EasyOCR (detector CRAFT + reconocedor CRNN, `lang=es`). Se usó en lugar de Tesseract porque el instalador de Tesseract requería permisos de administrador; EasyOCR es una arquitectura completamente distinta a PaddleOCR, por lo que la comparación sigue siendo informativa.
+md("""- **Documentos:** dos OCR alternativos: **Tesseract 5** (LSTM, `spa` de *tessdata_best*, `--psm 3`) y **EasyOCR** (detector CRAFT + reconocedor CRNN, `lang=es`). Mismo preprocesamiento que PaddleOCR (EXIF, RGB, lado ≤ 1600 px). Los tiempos se midieron con la CPU sin otros procesos.
 - **Audio:** NVIDIA Parakeet-TDT 0.6B v3 (multilingüe, incluye español) en ONNX int8 vía sherpa-onnx, con VAD Silero. RTF = tiempo de proceso / duración.""")
 code("""ed["CER_easyocr"] = [cer(r.texto_referencia, ocr.easyocr(r.archivo)["texto"]) for r in ed.itertuples()]
+ed["CER_tesseract"] = [cer(r.texto_referencia, ocr.tesseract(r.archivo)["texto"]) for r in ed.itertuples()]
+ed["seg_tesseract"] = [ocr.tesseract(r.archivo)["segundos_proceso"] for r in ed.itertuples()]
 ea["WER_parakeet"] = [wer(r.texto_referencia, voz.parakeet(r.archivo_audio)["texto"]) for r in ea.itertuples()]
 ea["RTF_parakeet"] = [voz.parakeet(r.archivo_audio)["segundos_proceso"] / r.duracion_seg for r in ea.itertuples()]
 ed["seg_paddle"] = [ocr.paddle(r.archivo)["segundos_proceso"] for r in ed.itertuples()]
 ed["seg_easyocr"] = [ocr.easyocr(r.archivo)["segundos_proceso"] for r in ed.itertuples()]
-display(ed[["id", "tipo", "CER_paddle", "CER_easyocr", "seg_paddle", "seg_easyocr"]].round(3))
+display(ed[["id", "tipo", "CER_paddle", "CER_easyocr", "CER_tesseract", "seg_paddle", "seg_easyocr", "seg_tesseract"]].round(3))
 display(ea[["id", "condicion", "WER_whisper", "WER_parakeet", "RTF_whisper", "RTF_parakeet"]].round(3))""")
 
 md("## 4. Tabla comparativa y casos difíciles")
 code("""tabla = pd.DataFrame([
     {"modalidad": "documentos", "modelo": "PaddleOCR PP-OCRv5 (base)", "métrica": "CER", "valor": ed.CER_paddle.mean(), "costo": f"{ed.seg_paddle.mean():.1f} s/doc CPU"},
     {"modalidad": "documentos", "modelo": "EasyOCR (alternativo)", "métrica": "CER", "valor": ed.CER_easyocr.mean(), "costo": f"{ed.seg_easyocr.mean():.1f} s/doc CPU"},
+    {"modalidad": "documentos", "modelo": "Tesseract 5 spa (alternativo)", "métrica": "CER", "valor": ed.CER_tesseract.mean(), "costo": f"{ed.seg_tesseract.mean():.1f} s/doc CPU"},
     {"modalidad": "audio", "modelo": "faster-whisper small (base)", "métrica": "WER", "valor": ea.WER_whisper.mean(), "costo": f"RTF {ea.RTF_whisper.mean():.2f}"},
     {"modalidad": "audio", "modelo": "Parakeet-TDT 0.6B v3 (alternativo)", "métrica": "WER", "valor": ea.WER_parakeet.mean(), "costo": f"RTF {ea.RTF_parakeet.mean():.2f}"}])
 tabla["valor"] = tabla.valor.round(3)
 tabla.to_csv("datos/metricas.csv", index=False, encoding="utf-8")
-ed[["id","tipo","CER_paddle","CER_easyocr"]].to_csv("datos/metricas_documentos.csv", index=False)
+ed[["id","tipo","CER_paddle","CER_easyocr","CER_tesseract"]].to_csv("datos/metricas_documentos.csv", index=False)
 ea[["id","condicion","WER_whisper","WER_parakeet","RTF_whisper","RTF_parakeet"]].to_csv("datos/metricas_audio.csv", index=False)
 tabla""")
-code("""fig = px.bar(ed.melt(id_vars=["id","tipo"], value_vars=["CER_paddle","CER_easyocr"], var_name="modelo", value_name="CER")
+code("""fig = px.bar(ed.melt(id_vars=["id","tipo"], value_vars=["CER_paddle","CER_easyocr","CER_tesseract"], var_name="modelo", value_name="CER")
              .groupby(["tipo","modelo"], as_index=False).CER.mean(), x="tipo", y="CER", color="modelo", barmode="group",
              title="El CER se dispara en manuscritos para ambos OCR: ninguno está entrenado en letra colonial")
 fig.show()
@@ -85,7 +88,7 @@ fig = px.bar(ea.melt(id_vars=["id","grupo"], value_vars=["WER_whisper","WER_para
              .groupby(["grupo","modelo"], as_index=False).WER.mean(), x="grupo", y="WER", color="modelo", barmode="group",
              title="WER por género del hablante en la muestra de OpenSLR")
 fig.show()""")
-code("""print("Por tipo de documento:"); display(ed.groupby("tipo")[["CER_paddle","CER_easyocr"]].mean().round(3))
+code("""print("Por tipo de documento:"); display(ed.groupby("tipo")[["CER_paddle","CER_easyocr","CER_tesseract"]].mean().round(3))
 print("Por tipo de audio:"); display(ea.groupby("grupo")[["WER_whisper","WER_parakeet"]].mean().round(3))""")
 
 md("""### Caso difícil: entrevistas con ruido, música y varios hablantes (Commons)

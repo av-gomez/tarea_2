@@ -115,7 +115,7 @@ for r in aud[aud.id.isin(DIARIZAR)].itertuples():
     asr[r.id]["texto"] = voz.texto_con_hablantes(segs)
 aud["texto_asr"] = aud.id.map(lambda i: asr[i]["texto"])
 aud["modelo_asr"] = aud.id.map(lambda i: asr[i]["modelo"])
-aud[aud.id.isin(ex.id)][["id", "titulo", "n_hablantes_esperado", "n_hablantes"]]""")
+aud[aud.id.isin(ex.id)][["id", "condicion", "n_hablantes_esperado", "n_hablantes"]]""")
 
 md("""## 3. Seudonimización
 Procedimiento: (0) el diccionario de personas privadas se guarda en `datos/raw/privados.json` (no versionado) para no publicar los nombres reales; (1) reglas automáticas para DNI (8 dígitos), teléfonos, correos; (2) diccionario de **personas privadas** identificadas en la revisión humana de los textos y metadatos (entrevistados/as de Commons). Personajes históricos y autoridades públicas en placas o documentos oficiales (Grau, Prat, San Martín, alcaldes en placas) **no** se sustituyen porque no son datos personales privados. El procedimiento automático se complementó con lectura de todos los textos de audio de Commons.""")
@@ -153,7 +153,7 @@ fig = make_subplots(1, 2, subplot_titles=("Caracteres OCR por documento", "Palab
 for t in cat.tipo.unique():
     fig.add_trace(go.Histogram(x=cat[cat.tipo == t].n_car, name=t, nbinsx=12), 1, 1)
 fig.add_trace(go.Histogram(x=aud.n_palabras_asr, name="audio", nbinsx=12), 1, 2)
-fig.update_layout(barmode="stack", title="Los manuscritos producen textos OCR mucho más cortos que los impresos; el ASR es homogéneo salvo las entrevistas")
+fig.update_layout(barmode="stack", title="Los impresos rinden ~3 veces más texto OCR que fotos y manuscritos; las entrevistas de Commons triplican las palabras de los clips de lectura")
 fig.show()""")
 
 md("## 5. Validación: extremos de longitud")
