@@ -9,3 +9,4 @@ tarea_2/modelos/*.bin
 tarea_2/modelos/*.onnx
 tarea_2/modelos/checkpoint-*/
 tarea_2/modelos/descargas/
+tools/
