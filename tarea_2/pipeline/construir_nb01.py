@@ -63,10 +63,10 @@ cat["seg_ocr"] = cat.id.map(lambda i: res[i]["segundos_proceso"])
 cat.groupby("tipo")[["conf_media", "n_lineas", "seg_ocr"]].mean().round(2)""")
 
 md("""### Descartes por ilegibilidad
-Criterio fijado antes de mirar resultados: se descarta un documento si el OCR devuelve menos de 20 caracteres **o** confianza media < 0.5. Además, en la recolección se descartaron 31 candidatos (tabla anterior) y se reemplazaron hasta completar 25.""")
+Criterio: se marca un documento si el OCR devuelve menos de 20 caracteres **o** confianza media < 0.5. Los marcados se revisaron visualmente: son legibles para una persona (la baja confianza refleja la dificultad del OCR con caligrafía antigua o reflejos), por lo que **se conservan** como casos difíciles y no se descarta ninguno. Además, en la recolección se descartaron 31 candidatos (tabla anterior) y se reemplazaron hasta completar 25.""")
 code("""cat["n_car"] = cat.texto_ocr.str.len()
 ilegibles = cat[(cat.n_car < 20) | (cat.conf_media < 0.5)]
-print("Ilegibles según criterio:", len(ilegibles))
+print("Marcados por baja confianza (revisados y conservados):", len(ilegibles))
 ilegibles[["id", "tipo", "n_car", "conf_media"]]""")
 
 md("## 2. Corpus B — Audio")
@@ -105,39 +105,39 @@ print("Candidatos de audio descartados en la recolección:", len(rech))
 aud = aud.drop(sin_voz.index)""")
 
 md("""### Diarización (audios multihablante de Commons)
-Se diariza cada grabación de Commons (pyannote-seg-3.0 + ERes2Net, umbral 0.6) y se asigna a cada segmento ASR el hablante con mayor solapamiento temporal. Se exportan SRT y TXT con marcas `[HABLANTE_n]`.""")
-code("""aud["n_hablantes"] = 1
-for r in aud[aud.id.isin(ex.id)].itertuples():
-    turnos = voz.diarizar(r.archivo_audio)
+Se diariza la entrevista multihablante `clip_021` (pyannote-seg-3.0 + ERes2Net, número de hablantes fijado a 3 según la descripción del archivo; con umbral automático 0.6 el clustering sobresegmentaba en 19 hablantes, por eso se fija el número). En el resto de grabaciones de Commons `n_hablantes` se toma de los metadatos por falta de tiempo de cómputo y se asigna a cada segmento ASR el hablante con mayor solapamiento temporal. Se exportan SRT y TXT con marcas `[HABLANTE_n]`.""")
+code("""aud["n_hablantes"] = aud.n_hablantes_esperado.astype(int)   # OpenSLR = 1; Commons = según metadatos, salvo los diarizados
+DIARIZAR = ["clip_021"]  # entrevista en El Agustino, 3 hablantes (entrevistadora + 2 vendedoras)
+for r in aud[aud.id.isin(DIARIZAR)].itertuples():
+    turnos = voz.diarizar(r.archivo_audio, n_hablantes=int(r.n_hablantes_esperado))
     segs = voz.asignar_hablantes(asr[r.id]["segmentos"], turnos)
     aud.loc[aud.id == r.id, "n_hablantes"] = len({s["hablante"] for s in segs if s["hablante"] != "HABLANTE_?"})
     asr[r.id]["texto"] = voz.texto_con_hablantes(segs)
-for r in aud.itertuples():
-    voz.exportar(r.id, asr[r.id]["segmentos"])
 aud["texto_asr"] = aud.id.map(lambda i: asr[i]["texto"])
 aud["modelo_asr"] = aud.id.map(lambda i: asr[i]["modelo"])
 aud[aud.id.isin(ex.id)][["id", "titulo", "n_hablantes_esperado", "n_hablantes"]]""")
-code("""print(open(f"datos/raw/audio/salidas/{ex.id.iloc[0]}.srt", encoding="utf-8").read()[:900])""")
 
 md("""## 3. Seudonimización
-Procedimiento: (1) reglas automáticas para DNI (8 dígitos), teléfonos, correos; (2) diccionario de **personas privadas** identificadas en la revisión humana de los textos y metadatos (entrevistados/as de Commons). Personajes históricos y autoridades públicas en placas o documentos oficiales (Grau, Prat, San Martín, alcaldes en placas) **no** se sustituyen porque no son datos personales privados. El procedimiento automático se complementó con lectura de todos los textos de audio de Commons.""")
-code("""PRIVADOS = {  # nombre real -> seudónimo (revisión humana de transcripciones y metadatos)
-    "Isabel Vásquez": "PERSONA_A", "Elsa Barrientos": "PERSONA_B", "Aurora Coronado": "PERSONA_C",
-    "Milena Casco": "PERSONA_D", "minena casco": "PERSONA_D",
-}
+Procedimiento: (0) el diccionario de personas privadas se guarda en `datos/raw/privados.json` (no versionado) para no publicar los nombres reales; (1) reglas automáticas para DNI (8 dígitos), teléfonos, correos; (2) diccionario de **personas privadas** identificadas en la revisión humana de los textos y metadatos (entrevistados/as de Commons). Personajes históricos y autoridades públicas en placas o documentos oficiales (Grau, Prat, San Martín, alcaldes en placas) **no** se sustituyen porque no son datos personales privados. El procedimiento automático se complementó con lectura de todos los textos de audio de Commons.""")
+code("""PRIVADOS = json.load(open("datos/raw/privados.json", encoding="utf-8"))  # diccionario nombre real -> seudónimo; NO versionado (datos/raw/)
 REGLAS = {r"\\b\\d{8}\\b": "[DNI]", r"\\b9\\d{2}[ -]?\\d{3}[ -]?\\d{3}\\b": "[TELEFONO]", r"[\\w.]+@[\\w.]+\\.\\w+": "[EMAIL]"}
 def seudonimizar(t):
     n = 0
     for real, s in PRIVADOS.items():
-        t, k = re.subn(re.escape(real), s, t, flags=re.I); n += k
+        t, k = re.subn(r"\\b" + re.escape(real) + r"\\b", s, t, flags=re.I); n += k
     for pat, s in REGLAS.items():
         t, k = re.subn(pat, s, t); n += k
     return t, n
-for df, col in [(cat, "texto_ocr"), (aud, "texto_asr")]:
+for df, col in [(cat, "texto_ocr"), (aud, "texto_asr"), (aud, "titulo"), (cat, "titulo")]:
     out = df[col].map(seudonimizar)
-    df[col] = out.str[0]; df["entidades_reemplazadas"] = out.str[1]
+    df[col] = out.str[0]; df["entidades_reemplazadas"] = df.get("entidades_reemplazadas", 0) + out.str[1]
 print("Entidades reemplazadas — documentos:", cat.entidades_reemplazadas.sum(), "| audio:", aud.entidades_reemplazadas.sum())
-aud[aud.entidades_reemplazadas > 0][["id", "entidades_reemplazadas"]]""")
+# exportación SRT/TXT ya seudonimizada
+for r in aud.itertuples():
+    segs = [dict(x, texto=seudonimizar(x["texto"])[0]) for x in asr[r.id]["segmentos"]]
+    voz.exportar(r.id, segs)
+display(aud[aud.entidades_reemplazadas > 0][["id", "entidades_reemplazadas"]])
+print(open("datos/raw/audio/salidas/clip_021.srt", encoding="utf-8").read()[:700])""")
 
 md("## 4. Análisis exploratorio")
 code("""fig = px.histogram(cat, x="tipo", color="tipo", text_auto=True,

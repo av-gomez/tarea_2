@@ -10,10 +10,10 @@ code = lambda s: C.append(nbf.v4.new_code_cell(s))
 md("""# Tarea 2 · Parte 2 — Evaluación, extracción estructurada y comparación de modelos
 
 **Protocolo (fijado antes de calcular métricas):**
-- Muestra de **10 documentos** (3 impresos, 4 fotos, 3 manuscritos) y **10 clips** (6 OpenSLR de distintos hablantes/géneros + 4 grabaciones de Commons con ruido, música o varios hablantes), todos del corpus de la Parte 1.
+- Muestra de **10 documentos** (3 impresos, 4 fotos, 3 manuscritos) y **10 clips** de OpenSLR 73 (10 hablantes distintos, 5 mujeres y 5 hombres), todos del corpus de la Parte 1. Las grabaciones de Commons (ruido, música, varios hablantes) no tienen referencia manual completa, por lo que se analizan aparte como *caso difícil* mediante el desacuerdo entre modelos.
 - Las configuraciones de todos los modelos son las de la Parte 1 y no se tocaron después de ver métricas.
 - Normalización idéntica para referencia e hipótesis: minúsculas, sin tildes, sin puntuación, espacios colapsados; en audio se eliminan marcas `[HABLANTE_n]`.
-- **Origen de las referencias:** en OpenSLR, transcripción humana oficial del corpus (revisada); en documentos y grabaciones de Commons, transcripción manual (columna `estado_revision` indica si fue revisada por la estudiante).""")
+- **Origen de las referencias:** en audio, el texto humano de OpenSLR 73 (guion leído por cada hablante, revisado contra el audio); en documentos, transcripción manual hecha mirando la imagen (columna `estado_revision`).""")
 
 code("""import sys, json, re, unicodedata
 import pandas as pd, numpy as np, jiwer
@@ -36,7 +36,7 @@ code("""ref_doc = pd.read_csv("datos/referencias_documentos.csv")
 EVAL_DOCS = ref_doc.id.tolist()
 ref_ol = pd.read_csv("datos/referencia_openslr.csv")
 ref_cm = pd.read_csv("datos/referencias_audio_commons.csv") if __import__("os").path.exists("datos/referencias_audio_commons.csv") else pd.DataFrame(columns=["id","texto_referencia","estado_revision"])
-EVAL_OL = ["clip_001", "clip_004", "clip_007", "clip_012", "clip_015", "clip_018"]
+EVAL_OL = ["clip_001", "clip_003", "clip_005", "clip_007", "clip_009", "clip_011", "clip_013", "clip_015", "clip_017", "clip_019"]  # 5 mujeres + 5 hombres, hablantes distintos
 ref_aud = pd.concat([ref_ol[ref_ol.id.isin(EVAL_OL)].rename(columns={"referencia_fuente": "texto_referencia"}).assign(estado_revision="transcripción humana OpenSLR"),
                      ref_cm], ignore_index=True)
 EVAL_AUD = ref_aud.id.tolist()
@@ -80,13 +80,25 @@ code("""fig = px.bar(ed.melt(id_vars=["id","tipo"], value_vars=["CER_paddle","CE
              .groupby(["tipo","modelo"], as_index=False).CER.mean(), x="tipo", y="CER", color="modelo", barmode="group",
              title="El CER se dispara en manuscritos para ambos OCR: ninguno está entrenado en letra colonial")
 fig.show()
-ea["grupo"] = np.where(ea.condicion.str.contains("estudio"), "lectura limpia (OpenSLR)", "entrevista con ruido/música (Commons)")
+ea["grupo"] = np.where(ea.id.isin(["clip_001","clip_003","clip_005","clip_007","clip_009"]), "OpenSLR mujeres", "OpenSLR hombres")
 fig = px.bar(ea.melt(id_vars=["id","grupo"], value_vars=["WER_whisper","WER_parakeet"], var_name="modelo", value_name="WER")
              .groupby(["grupo","modelo"], as_index=False).WER.mean(), x="grupo", y="WER", color="modelo", barmode="group",
-             title="El WER se multiplica en entrevistas de calle frente a lectura limpia")
+             title="WER por género del hablante en la muestra de OpenSLR")
 fig.show()""")
 code("""print("Por tipo de documento:"); display(ed.groupby("tipo")[["CER_paddle","CER_easyocr"]].mean().round(3))
 print("Por tipo de audio:"); display(ea.groupby("grupo")[["WER_whisper","WER_parakeet"]].mean().round(3))""")
+
+md("""### Caso difícil: entrevistas con ruido, música y varios hablantes (Commons)
+Sin referencia manual completa no se reporta WER; como indicador se usa el **desacuerdo entre modelos** (WER de Parakeet tomando a whisper como pseudo-referencia). Un valor alto indica que al menos uno de los dos falla. **No es una métrica de exactitud.**""")
+code("""cm = trans[trans.origen.str.startswith("Wikimedia")].copy()
+cm["desacuerdo_modelos"] = [wer(voz.whisper(r.archivo_audio)["texto"], voz.parakeet(r.archivo_audio)["texto"]) for r in cm.itertuples()]
+ol = trans[trans.id.isin(EVAL_AUD)].copy()
+ol["desacuerdo_modelos"] = [wer(voz.whisper(r.archivo_audio)["texto"], voz.parakeet(r.archivo_audio)["texto"]) for r in ol.itertuples()]
+print(f"Desacuerdo medio whisper vs Parakeet — OpenSLR: {ol.desacuerdo_modelos.mean():.2f} | Commons: {cm.desacuerdo_modelos.mean():.2f}")
+display(cm[["id", "titulo", "condicion", "n_hablantes", "desacuerdo_modelos"]].round(2))
+for r in cm.head(2).itertuples():
+    print("\n", r.id, r.condicion); print("whisper :", voz.whisper(r.archivo_audio)["texto"][:300]); print("parakeet:", voz.parakeet(r.archivo_audio)["texto"][:300])
+pd.DataFrame([{"id": r.id, "texto": voz.parakeet(r.archivo_audio)["texto"]} for r in trans.itertuples()]).to_csv("datos/transcripciones_parakeet.csv", index=False, encoding="utf-8")""")
 
 md("## 5. Extracción estructurada con LLM")
 code("""import os
