@@ -100,7 +100,7 @@ def parakeet(path, forzar=False):
     return res
 
 
-def diarizar(path, n_hablantes=-1, umbral=0.6, forzar=False):
+def diarizar(path, n_hablantes=-1, umbral=0.5, forzar=False):
     """pyannote-segmentation-3.0 + embeddings 3D-Speaker ERes2Net + clustering (sherpa-onnx)."""
     jp = _json_path(path, "diarizacion")
     if jp.exists() and not forzar:

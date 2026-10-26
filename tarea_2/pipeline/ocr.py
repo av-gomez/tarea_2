@@ -12,7 +12,9 @@ SALIDAS.mkdir(parents=True, exist_ok=True)
 RECORTES.mkdir(parents=True, exist_ok=True)
 TESSERACT = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-PADDLE_CFG = dict(lang="es", use_doc_orientation_classify=False, use_doc_unwarping=False,
+PADDLE_CFG = dict(text_detection_model_name="PP-OCRv5_mobile_det",
+                  text_recognition_model_name="latin_PP-OCRv5_mobile_rec",
+                  use_doc_orientation_classify=False, use_doc_unwarping=False,
                   use_textline_orientation=False, text_det_limit_side_len=1600)
 _ocr = {}
 
@@ -42,7 +44,7 @@ def paddle(path, forzar=False):
         xs, ys = poly[:, 0], poly[:, 1]
         im.crop((int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max()))).save(
             RECORTES / f"{Path(path).stem}_linea{i + 1}.png")
-    res = {"modelo": f"PaddleOCR {paddleocr.__version__} PP-OCRv5 (lang=es, max_lado=1600, sin unwarping)",
+    res = {"modelo": f"PaddleOCR {paddleocr.__version__} PP-OCRv5 mobile det + latin_PP-OCRv5_mobile_rec (es, max_lado=1600, sin unwarping)",
            "lineas": textos, "scores": scores, "texto": "\n".join(textos), "segundos_proceso": seg}
     jp.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     return res
