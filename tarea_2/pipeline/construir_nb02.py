@@ -93,21 +93,30 @@ print("Por tipo de audio:"); display(ea.groupby("grupo")[["WER_whisper","WER_par
 
 md("""### Caso difícil: entrevistas con ruido, música y varios hablantes (Commons)
 Sin referencia manual completa no se reporta WER; como indicador se usa el **desacuerdo entre modelos** (WER de Parakeet tomando a whisper como pseudo-referencia). Un valor alto indica que al menos uno de los dos falla. **No es una métrica de exactitud.**""")
-code("""cm = trans[trans.origen.str.startswith("Wikimedia")].copy()
+code("""PRIVADOS = json.load(open("datos/raw/privados.json", encoding="utf-8"))  # mismo diccionario no versionado del notebook 01
+def seud(t):
+    for real, s in PRIVADOS.items():
+        t = re.sub(r"\\b" + re.escape(real) + r"\\b", s, t, flags=re.I)
+    return t
+cm = trans[trans.origen.str.startswith("Wikimedia")].copy()
 cm["desacuerdo_modelos"] = [wer(voz.whisper(r.archivo_audio)["texto"], voz.parakeet(r.archivo_audio)["texto"]) for r in cm.itertuples()]
 ol = trans[trans.id.isin(EVAL_AUD)].copy()
 ol["desacuerdo_modelos"] = [wer(voz.whisper(r.archivo_audio)["texto"], voz.parakeet(r.archivo_audio)["texto"]) for r in ol.itertuples()]
 print(f"Desacuerdo medio whisper vs Parakeet — OpenSLR: {ol.desacuerdo_modelos.mean():.2f} | Commons: {cm.desacuerdo_modelos.mean():.2f}")
-display(cm[["id", "titulo", "condicion", "n_hablantes", "desacuerdo_modelos"]].round(2))
-for r in cm.head(2).itertuples():
-    print("\n", r.id, r.condicion); print("whisper :", voz.whisper(r.archivo_audio)["texto"][:300]); print("parakeet:", voz.parakeet(r.archivo_audio)["texto"][:300])
-pd.DataFrame([{"id": r.id, "texto": voz.parakeet(r.archivo_audio)["texto"]} for r in trans.itertuples()]).to_csv("datos/transcripciones_parakeet.csv", index=False, encoding="utf-8")""")
+display(cm[["id", "condicion", "n_hablantes", "desacuerdo_modelos"]].round(2))
+for r in cm.iloc[[0, 2]].itertuples():
+    print("---", r.id, r.condicion)
+    print("whisper :", seud(voz.whisper(r.archivo_audio)["texto"])[:300])
+    print("parakeet:", seud(voz.parakeet(r.archivo_audio)["texto"])[:300])
+pd.DataFrame([{"id": r.id, "texto": seud(voz.parakeet(r.archivo_audio)["texto"])} for r in trans.itertuples()]).to_csv(
+    "datos/transcripciones_parakeet.csv", index=False, encoding="utf-8")""")
 
 md("## 5. Extracción estructurada con LLM")
 code("""import os
 from dotenv import load_dotenv; load_dotenv("../.env"); load_dotenv(".env")
 HAY_LLM = bool(os.environ.get("GEMINI_API_KEY"))
 print("API key de Gemini disponible:", HAY_LLM)
+# gemini-3.1-flash-lite: se usó un único modelo para las 51 extracciones (la cuota gratuita de gemini-3.5-flash se agotó a mitad del proceso)
 if HAY_LLM:
     import llm
     filas = [llm.extraer(r.id, r.texto_ocr, "documento") for r in docs.itertuples()] + \\
@@ -118,7 +127,12 @@ if HAY_LLM:
     display(ext.head())""")
 
 md("## 6. Auditoría humana de 20 extracciones")
-md("""Criterios: una extracción es **completamente correcta** si (a) `tema` y `resumen` son fieles al texto, (b) todo campo no nulo está sustentado literalmente en el texto, (c) no se omiten datos explícitos del texto (`fecha`, `emisor`, `monto`) y (d) no hay campos inventados. Muestra: 10 documentos + 10 audios al azar (semilla 7).""")
+md("""Criterios: una extracción es **completamente correcta** si (a) `tema` y `resumen` son fieles al texto, (b) todo campo no nulo está sustentado literalmente en el texto, (c) no se omiten datos explícitos del texto (`fecha`, `emisor`, `monto`) y (d) no hay campos inventados. Muestra: 10 documentos + 10 audios al azar (`DataFrame.sample(10, random_state=7)` en cada corpus). Para `citas_clave` y `lugares_mencionados` se verificó por código que cada cadena aparezca literalmente en el texto.
+
+**Quién revisó:** la revisión campo por campo la hizo el asistente de IA (Claude Code), comparando cada campo con el texto OCR/ASR. La columna `revisor` de `datos/auditoria_llm.csv` lo indica; la estudiante debe confirmarla o corregirla.""")
+code("""muestra = pd.concat([docs.sample(10, random_state=7)[["id"]], trans.sample(10, random_state=7)[["id"]]]).id.tolist()
+print(muestra)""")
+md("""Resultado:""")
 code("""if os.path.exists("datos/auditoria_llm.csv"):
     aud_llm = pd.read_csv("datos/auditoria_llm.csv")
     ok = int(aud_llm.correcto.sum())
@@ -129,7 +143,18 @@ else:
 
 md("## 7. Decisión y reflexión")
 code("""print(tabla.to_string(index=False))""")
-md("""Ver README para la discusión completa. Resumen: se elige el modelo con menor error en cada modalidad salvo que su costo (RTF) impida su uso en CPU; los manuscritos coloniales y las entrevistas callejeras son los casos donde ambos modelos fallan más, por falta de datos de entrenamiento con caligrafía antigua y por ruido ambiente/solapamiento de voces respectivamente.""")
+md("""### Decisión
+| Modalidad | Elección | Por qué |
+|---|---|---|
+| Documentos | **PaddleOCR PP-OCRv5 mobile** | Menor CER global (0.476 frente a 0.529 de EasyOCR y 0.672 de Tesseract) y 5 veces más rápido que EasyOCR en CPU (5.6 frente a 28.6 s/doc). Tesseract es el más rápido (2.5 s/doc), pero su CER en fotos duplica al de PaddleOCR. |
+| Audio | **faster-whisper small** como modelo principal; **Parakeet** como alternativa si importa la velocidad | En lectura limpia los dos quedan casi empatados (WER 0.032 frente a 0.039; la diferencia es de unas pocas palabras sobre ~1 400). Parakeet es ~3 veces más rápido (RTF 0.17 frente a 0.48). Whisper entrega puntuación y segmentos más útiles para el SRT y la diarización. |
+
+### Reflexión por tipo
+- **Fotos (CER 0.23 con PaddleOCR, el mejor caso).** Las placas tienen letra grande de molde. El error se concentra en la placa de bronce con reflejos (doc_014, CER 0.38) y en la leyenda latina curva (doc_016, 0.43). La placa de Grau, nítida, baja a 0.04.
+- **Impresos (0.48).** El CER es más alto de lo esperado porque los 3 impresos evaluados tienen **partes manuscritas o tipografía decorativa**: los datos escritos a mano en el recibo de 1895, la caligrafía inglesa del diploma de 1921 y los textos superpuestos con sello de la acción de 1878. El OCR lee bien las partes tipográficas y falla en lo demás.
+- **Manuscritos (0.74–0.81, el peor caso).** Ningún modelo está entrenado en letra colonial de los siglos XVIII y XIX ni en sus abreviaturas. Por eso los tres OCR producen texto casi inutilizable. EasyOCR queda algo mejor, pero el error sigue siendo de 0.74. Para este tipo haría falta un modelo de HTR especializado (por ejemplo, Transkribus o TrOCR afinado) o una transcripción humana.
+- **Audio en estudio frente a audio de calle.** Con lectura limpia los dos ASR cometen menos de 4 % de error. En las entrevistas de Commons el desacuerdo entre modelos sube de 0.04 a 0.36 de media, y llega a 0.73 en la conferencia con audio a −40 dB y a 0.66 en la feria con música. Es la señal de que el ruido, la música y el habla superpuesta degradan mucho la transcripción.
+- **LLM.** Acertó en 16 de 20 casos. Los errores aparecen cuando el OCR es ruidoso: copió basura como si fuera una fecha, inventó una fecha, confundió el emisor de un documento citado con el del documento, y una vez parafraseó una cita que debía ser textual. Ante un OCR ilegible (doc_017 y doc_022) respondió bien: dejó los campos en `null` y no inventó nada.""")
 
 nb["cells"] = C
 nb.metadata["kernelspec"] = {"name": "python3", "display_name": "Python 3", "language": "python"}

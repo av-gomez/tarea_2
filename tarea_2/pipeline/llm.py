@@ -7,7 +7,7 @@ import time
 BASE = Path(__file__).resolve().parents[1]
 CACHE = BASE / "datos/raw/llm"
 CACHE.mkdir(parents=True, exist_ok=True)
-MODELO = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+MODELO = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
 
 PROMPT = """Eres un asistente de archivística. Extrae información SOLO del texto dado (puede tener errores de {origen}).
 Devuelve exclusivamente un objeto JSON con estas claves:

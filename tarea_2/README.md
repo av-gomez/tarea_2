@@ -33,13 +33,34 @@
 La fuente, la licencia y la forma de recuperar cada archivo están en `datos/fuentes.csv`. Los originales (`datos/raw/`) y los modelos no se versionan. En `datos/ejemplos/` solo hay miniaturas de imágenes de dominio público o CC y 4 clips de OpenSLR en MP3; todos permiten redistribución y no contienen datos personales.
 
 ## Resultados de evaluación (los mismos 10 documentos y los mismos 10 clips para todos los modelos)
-RESULTADOS_TABLA
+| Modalidad | Modelo | Métrica | Valor | Costo (CPU) |
+|---|---|---|---|---|
+| Documentos | **PaddleOCR PP-OCRv5 mobile (base)** | CER | **0.476** | 5.6 s/doc |
+| Documentos | EasyOCR 1.7.2 | CER | 0.529 | 28.6 s/doc |
+| Documentos | Tesseract 5 spa | CER | 0.672 | 2.5 s/doc |
+| Audio | **faster-whisper small (base)** | WER | **0.032** | RTF 0.48 |
+| Audio | Parakeet-TDT 0.6B v3 | WER | 0.039 | RTF 0.17 |
 
-**Acuerdo LLM-humano:** RESULTADO_AUDITORIA
+CER por tipo de documento con PaddleOCR: fotos 0.23 · impresos 0.48 · manuscritos 0.81. En las entrevistas de Commons, que no tienen referencia, el desacuerdo whisper/Parakeet sube de 0.04 a 0.36.
+
+**Acuerdo LLM-humano:** **16/20 (80 %)** de extracciones completamente correctas (`datos/auditoria_llm.csv`).
+- **Criterios:** tema y resumen fieles al texto; todo campo no nulo sustentado literalmente; sin omitir fechas, emisores ni montos explícitos; sin campos inventados.
+- **Errores encontrados:**
+  - Una fecha inventada (doc_010).
+  - Ruido OCR copiado como si fuera fecha (doc_012).
+  - El emisor de un parte citado tomado como emisor de la gaceta (doc_001).
+  - Una cita parafraseada en lugar de textual (clip_026).
+- **Quién revisó:** la revisión campo por campo la hizo el asistente de IA, comparando cada campo con el texto, y está marcada así en la columna `revisor`. Debe confirmarla la estudiante.
 
 ## Hallazgos
-1. HALLAZGO_1
-2. HALLAZGO_2
+1. **El tipo de escritura importa más que la calidad de la foto.**
+   - Las fotos de placas con letra de molde, a pesar de los reflejos y la inclinación, logran el mejor CER (0.23).
+   - Los "impresos" evaluados quedan en 0.48 porque mezclan tipografía con datos manuscritos o caligrafía decorativa.
+   - Los manuscritos coloniales rondan 0.8 con los tres OCR, porque ninguno está entrenado en paleografía.
+2. **En habla leída el ASR ya es casi perfecto; el reto es el audio de campo.**
+   - Whisper `small` y Parakeet cometen menos de 4 % de error en OpenSLR.
+   - En las entrevistas de calle y feria el desacuerdo entre ambos se multiplica por 9 (de 0.04 a 0.36), y llega a 0.73 con audio a −40 dB.
+   - Parakeet es ~3 veces más rápido con precisión casi igual, lo que lo vuelve atractivo para procesar en lote en CPU.
 
 ## Limitaciones técnicas
 1. **Referencias y muestra de audio.**

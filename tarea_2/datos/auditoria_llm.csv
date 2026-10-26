@@ -1,0 +1,21 @@
+id,modalidad,correcto,error,revisor
+doc_002,documento,1,,asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_006,documento,1,,asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_012,documento,0,"fecha = 'SETIENBRE INTS': copia literal de ruido OCR, no es una fecha válida (debió ser null)",asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_014,documento,1,,asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_003,documento,1,,asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_022,documento,1,,asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_010,documento,0,"fecha = '1. de Setiembre de 1926' inventada: el OCR solo contiene 'el 1. de de entroga', sin mes ni año",asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_017,documento,1,,asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_013,documento,1,,asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+doc_001,documento,0,"emisor = 'Antonio José de Sucre' y lugar = 'Ayacucho' corresponden al parte citado dentro de la gaceta; el emisor del documento es el Gobierno de Lima (aparece en el encabezado) y el lugar, Lima",asistente IA (Claude Code) con verificación literal contra el OCR; pendiente de confirmación de la estudiante
+clip_013,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_006,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_002,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_018,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_012,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_010,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_003,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_024,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_026,audio,0,"citas_clave[1] no es textual: el LLM cambió 'por su disposición y la presencia de grandes...' por 'y la otra función fue religiosa'",asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
+clip_014,audio,1,,asistente IA (Claude Code) con verificación literal contra el ASR; pendiente de confirmación de la estudiante
